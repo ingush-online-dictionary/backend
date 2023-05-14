@@ -4,7 +4,7 @@ import { TranslateFrom } from './entities/translate-from.entity';
 import { Translation } from '@prisma/client';
 
 @Injectable()
-export class DictionaryService {
+export class TranslationsService {
   constructor(private readonly prisma: PrismaService) {}
 
   async getTranslationsList(

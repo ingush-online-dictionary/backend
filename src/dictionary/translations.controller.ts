@@ -5,22 +5,22 @@ import {
   ParseIntPipe,
   Query,
 } from '@nestjs/common';
-import { DictionaryService } from './dictionary.service';
+import { TranslationsService } from './translations.service';
 import { TranslateFrom } from './entities/translate-from.entity';
 
-@Controller('dictionary')
-export class DictionaryController {
-  constructor(private readonly dictionaryService: DictionaryService) {}
+@Controller('translations')
+export class TranslationsController {
+  constructor(private readonly translationsService: TranslationsService) {}
 
-  @Get('/get-words-by-part')
-  getWordsByPart(
+  @Get('/')
+  getTranslations(
     @Query('part') part: string,
     @Query('translateFrom', new ParseEnumPipe(TranslateFrom))
     type: TranslateFrom,
     @Query('limit', ParseIntPipe) limit: number,
     @Query('offset', ParseIntPipe) offset: number,
   ) {
-    return this.dictionaryService.getTranslationsList(
+    return this.translationsService.getTranslationsList(
       type,
       part,
       limit,
