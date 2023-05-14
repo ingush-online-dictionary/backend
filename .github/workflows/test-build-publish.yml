@@ -2,7 +2,7 @@ name: Create and publish a Docker image
 
 on:
   push:
-    branches: ["prod"]
+    branches: ['prod']
 
 env:
   REGISTRY: ghcr.io
@@ -31,7 +31,7 @@ jobs:
         uses: docker/metadata-action@v4
         with:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
-          tags: test
+          tags: production
 
       - name: Build and push Docker image
         uses: docker/build-push-action@v3
