@@ -1,0 +1,18 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Translation {
+  id                    String   @id() @default(cuid())
+  firstLangTranslation  String
+  firstLangDescription  String
+  secondLangTranslation String
+  secondLangDescription String
+  createdAt             DateTime @default(now())
+  updatedAt             DateTime @updatedAt()
+}
