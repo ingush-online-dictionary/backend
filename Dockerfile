@@ -20,5 +20,6 @@ WORKDIR /app
 COPY --from=builder /app/package*.json ./
 RUN npm i --omit=dev
 COPY --from=builder /app/dist/ ./dist/
+COPY --from=builder /app/prisma ./prisma
 
-CMD ["npm", "start:prod"]
+CMD ["npm", "run", "start:prod"]
