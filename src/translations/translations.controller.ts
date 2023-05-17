@@ -3,6 +3,7 @@ import {
   Controller,
   Delete,
   Get,
+  Param,
   ParseEnumPipe,
   ParseIntPipe,
   Post,
@@ -38,7 +39,7 @@ export class TranslationsController {
   }
 
   @Delete('/:translationId')
-  deleteById(@Query('translationId') translationId: string) {
+  deleteById(@Param('translationId') translationId: string) {
     return this.translationsService.deleteById(translationId);
   }
 }
