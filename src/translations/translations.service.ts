@@ -11,7 +11,7 @@ export class TranslationsService {
     return this.prisma.translation.create({ data: translation });
   }
 
-  async getTranslationsList(
+  async getDropdownTranslations(
     type: TranslateFrom,
     part: string,
     limit: number,
@@ -35,6 +35,28 @@ export class TranslationsService {
         firstLangTranslation: true,
         secondLangTranslation: true,
       },
+    });
+  }
+
+  async getTranslationsList(
+    type: TranslateFrom,
+    part: string,
+    limit: number,
+    offset: number,
+  ) {
+    return this.prisma.translation.findMany({
+      where: {
+        firstLangTranslation:
+          type === TranslateFrom.FirstLang
+            ? { contains: part, mode: 'insensitive' }
+            : undefined,
+        secondLangTranslation:
+          type === TranslateFrom.SecondLang
+            ? { contains: part, mode: 'insensitive' }
+            : undefined,
+      },
+      skip: offset,
+      take: limit,
     });
   }
 

@@ -23,7 +23,7 @@ export class TranslationsController {
   }
 
   @Get('/')
-  getTranslations(
+  getTranslationsList(
     @Query('part') part: string,
     @Query('translateFrom', new ParseEnumPipe(TranslateFrom))
     type: TranslateFrom,
@@ -31,6 +31,22 @@ export class TranslationsController {
     @Query('offset', ParseIntPipe) offset: number,
   ) {
     return this.translationsService.getTranslationsList(
+      type,
+      part,
+      limit,
+      offset,
+    );
+  }
+
+  @Get('/dropdown')
+  getDropdownTranslations(
+    @Query('part') part: string,
+    @Query('translateFrom', new ParseEnumPipe(TranslateFrom))
+    type: TranslateFrom,
+    @Query('limit', ParseIntPipe) limit: number,
+    @Query('offset', ParseIntPipe) offset: number,
+  ) {
+    return this.translationsService.getDropdownTranslations(
       type,
       part,
       limit,
