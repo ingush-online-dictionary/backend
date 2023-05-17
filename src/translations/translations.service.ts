@@ -20,9 +20,13 @@ export class TranslationsService {
     return this.prisma.translation.findMany({
       where: {
         firstLangTranslation:
-          type === TranslateFrom.FirstLang ? { contains: part } : undefined,
+          type === TranslateFrom.FirstLang
+            ? { contains: part, mode: 'insensitive' }
+            : undefined,
         secondLangTranslation:
-          type === TranslateFrom.SecondLang ? { contains: part } : undefined,
+          type === TranslateFrom.SecondLang
+            ? { contains: part, mode: 'insensitive' }
+            : undefined,
       },
       skip: offset,
       take: limit,
