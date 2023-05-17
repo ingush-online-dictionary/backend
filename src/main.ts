@@ -4,7 +4,10 @@ import { PrismaService } from './prisma.service';
 import { ValidationPipe } from '@nestjs/common';
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule, { cors: false });
+  const app = await NestFactory.create(AppModule);
+  app.enableCors({
+    origin: '*',
+  });
   const prismaService = app.get(PrismaService);
   prismaService.enableShutdownHooks(app);
   app.useGlobalPipes(new ValidationPipe());
